@@ -59,14 +59,11 @@ class UserViewModel : ViewModel() {
                 val response = RetrofitInstance.jsonPlaceholderApi.fetchUsers()
                 if (response.isSuccessful) {
                     _users.value = ApiState.Success(response.body() ?: emptyList())
-                    Log.i("dataResponse", response.body().toString())
                 } else {
                     _users.value = ApiState.Error("Error: ${response.errorBody()}")
-                    Log.i("executes", "yes")
                 }
             } catch (exception: Exception) {
                 _users.value = ApiState.Error(exception.message.toString())
-                Log.i("executes", exception.message.toString())
             }
         }
     }
@@ -90,7 +87,6 @@ class UserViewModel : ViewModel() {
                         }
                     }
 
-                    Log.i("entry1", createdUser.toString())
                     onSuccess()
                 } else {
                     Toast.makeText(
